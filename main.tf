@@ -3,7 +3,7 @@
 ##-----------------------------------------------------------------------------
 module "labels" {
   source      = "cypik/labels/azure"
-  version     = "1.0.2"
+  version     = "1.0.3"
   name        = var.name
   environment = var.environment
   managedby   = var.managedby
@@ -44,7 +44,6 @@ resource "azurerm_subnet" "specific_subnet" {
   address_prefixes                              = [var.subnet_prefixes[count.index]]
   virtual_network_name                          = var.virtual_network_name
   private_endpoint_network_policies             = lookup(var.subnet_enforce_private_link_endpoint_network_policies, var.specific_subnet_names, false) ? "Enabled" : "Disabled"
-  service_endpoints                             = var.service_endpoints
   private_link_service_network_policies_enabled = var.subnet_enforce_private_link_service_network_policies
 
   dynamic "delegation" {
